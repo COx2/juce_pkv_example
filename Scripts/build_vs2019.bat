@@ -23,3 +23,5 @@ if exist "%VSDEVCMD_2019_ENTERPRISE%" (
 )
 
 cmake -B Build -G "Visual Studio 16 2019" .
+
+cmake --build Build

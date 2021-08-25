@@ -14,3 +14,4 @@ cd "${SCRIPT_DIRECTORY}/.."
 
 cmake -B Build -G Xcode .
 
+cmake --build Build

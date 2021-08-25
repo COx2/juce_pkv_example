@@ -1,8 +1,3 @@
-juce_add_console_app(PKVExample
-    PRODUCT_NAME "PKV implements with JUCE") 
-    
-juce_generate_juce_header(PKVExample)
-
 ### Find source files with generate source groups ###
 # Test that the target_path should be excluded
 # if the path is excluded, IS_EXCLUDED will be set to TRUE
@@ -79,30 +74,53 @@ endfunction()
 
 generate_source_list(
     SOURCES
-    BASE_DIR "${CMAKE_CURRENT_LIST_DIR}/Source"
-    SOURCE_DIRS "${CMAKE_CURRENT_LIST_DIR}/Source"
+    BASE_DIR "${CMAKE_CURRENT_LIST_DIR}"
+    SOURCE_DIRS "${CMAKE_CURRENT_LIST_DIR}"
 #     EXCLUSION_PATTERNS ".+/Test/.+"
     )
+###^^^ Find source files with generate source groups ^^^###
 
-target_sources(PKVExample
+# Tell CMake to add a static library target
+add_library(pkv STATIC)
+
+# Add sources to the target
+target_sources(pkv
     PRIVATE
         ${SOURCES}
     )
 
-###^^^ Find source files with generate source groups ^^^###
-
-target_compile_definitions(PKVExample
-    PUBLIC
-        # JUCE_WEB_BROWSER and JUCE_USE_CURL would be on by default, but you might not need them.
-        JUCE_WEB_BROWSER=0  # If you remove this, add `NEEDS_WEB_BROWSER TRUE` to the `juce_add_plugin` call
-        JUCE_USE_CURL=0     # If you remove this, add `NEEDS_CURL TRUE` to the `juce_add_plugin` call
-        JUCE_VST3_CAN_REPLACE_VST2=0
-        JUCE_DISPLAY_SPLASH_SCREEN=0)
-
-target_link_libraries(PKVExample
+# Add compile definitions to the target
+# When use this library, you should change these definitions here...
+target_compile_definitions(pkv
     PRIVATE
-        juce::juce_audio_utils
+        PKV_SUBKEY0_PARAM_A=16
+        PKV_SUBKEY0_PARAM_B=2
+        PKV_SUBKEY0_PARAM_C=128
+        PKV_SUBKEY1_PARAM_A=18
+        PKV_SUBKEY1_PARAM_B=0
+        PKV_SUBKEY1_PARAM_C=84
+        PKV_SUBKEY2_PARAM_A=9
+        PKV_SUBKEY2_PARAM_B=1
+        PKV_SUBKEY2_PARAM_C=91
+        PKV_SUBKEY3_PARAM_A=21
+        PKV_SUBKEY3_PARAM_B=3
+        PKV_SUBKEY3_PARAM_C=220
+        PKV_CHECKSUM_MAGIC_NUMBER_LEFT=124
+        PKV_CHECKSUM_MAGIC_NUMBER_RIGHT=82
+    )
+
+# Link JUCE modules  to the target
+target_link_libraries(pkv
+    PRIVATE
+        juce::juce_core
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
-        juce::juce_recommended_warning_flags)
+        juce::juce_recommended_warning_flags
+    )
+
+# Tell CMake where our library's headers are located
+target_include_directories(pkv
+    PUBLIC
+        "${CMAKE_CURRENT_LIST_DIR}"
+    )
