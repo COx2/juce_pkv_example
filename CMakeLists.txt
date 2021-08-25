@@ -9,4 +9,4 @@ project(juce_pkv_example VERSION 0.0.1)
 
 add_subdirectory(External/JUCE)
 
-add_subdirectory(Examples/Main/Main.cmake)
+add_subdirectory(Examples/Main)

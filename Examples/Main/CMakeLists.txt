@@ -1,5 +1,6 @@
 juce_add_console_app(PKVExample
     PRODUCT_NAME "PKV implements with JUCE") 
+    
 juce_generate_juce_header(PKVExample)
 
 ### Find source files with generate source groups ###
