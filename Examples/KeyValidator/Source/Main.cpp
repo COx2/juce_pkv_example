@@ -1,10 +1,10 @@
 #include <JuceHeader.h>
 
-#include "KeyValidater.h"
+#include "KeyValidator.h"
 
 int main(int argc, char* argv[])
 {
-    cox2::KeyValidater keyValidater;
+    cox2::KeyValidator keyValidator;
 
     // Your code goes here!
     juce::ignoreUnused(argc, argv);
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
         std::cin >> input_key;
         
-        std::cout << "Key validation result: " << std::boolalpha << keyValidater.isKeyValid(juce::String(input_key)) << std::endl;
+        std::cout << "Key validation result: " << std::boolalpha << keyValidator.isKeyValid(juce::String(input_key)) << std::endl;
     }
 
     return 0;

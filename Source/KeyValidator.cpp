@@ -1,20 +1,20 @@
-#include "KeyValidater.h"
+#include "KeyValidator.h"
 #include "KeyParameters.h"
 
 namespace cox2
 {
 
 //==============================================================================
-KeyValidater::KeyValidater()
+KeyValidator::KeyValidator()
 {
 }
 
-KeyValidater::~KeyValidater()
+KeyValidator::~KeyValidator()
 {
 }
 
 //==============================================================================
-bool KeyValidater::isKeyValid(const juce::String& key)
+bool KeyValidator::isKeyValid(const juce::String& key)
 {
     if (!isKeyFormatValid(key))
     {
@@ -79,13 +79,13 @@ bool KeyValidater::isKeyValid(const juce::String& key)
     return true;
 }
 
-juce::String KeyValidater::toFixedHex(int num, int length)
+juce::String KeyValidator::toFixedHex(int num, int length)
 {
     return juce::String::toHexString(num).toUpperCase().paddedLeft('0', length).substring(0, length);
 }
 
 //==============================================================================
-juce::String KeyValidater::getSubkeyFromSeed(const juce::String& seed, int paramA, int paramB, int paramC)
+juce::String KeyValidator::getSubkeyFromSeed(const juce::String& seed, int paramA, int paramB, int paramC)
 {
     int seed_value = seed.getHexValue64();
     
@@ -108,7 +108,7 @@ juce::String KeyValidater::getSubkeyFromSeed(const juce::String& seed, int param
     return toFixedHex(subkey, 2);
 }
 
-juce::String KeyValidater::getChecksumForSerial(const juce::StringRef serial)
+juce::String KeyValidator::getChecksumForSerial(const juce::StringRef serial)
 {
     // Use magic numbers
     int right = checksum_magic_number_right;
@@ -132,18 +132,18 @@ juce::String KeyValidater::getChecksumForSerial(const juce::StringRef serial)
     return toFixedHex((left << 8) + right, 4);
 }
 
-bool KeyValidater::isKeyFormatValid(const juce::String& key)
+bool KeyValidator::isKeyFormatValid(const juce::String& key)
 {
     return key.length() == 24 &&
         key.replace("-", "").length() == 20;
 }
 
-bool KeyValidater::isSeedFormatValid(const juce::String& seed)
+bool KeyValidator::isSeedFormatValid(const juce::String& seed)
 {
     return seed.containsOnly("0123456789ABCDEF");
 }
 
-bool KeyValidater::isSerialChecksumValid(const juce::String& serial, const juce::String& checksum)
+bool KeyValidator::isSerialChecksumValid(const juce::String& serial, const juce::String& checksum)
 {
     juce::String actual = getChecksumForSerial(serial);
     return actual.equalsIgnoreCase(checksum);

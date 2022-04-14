@@ -1,2 +1,2 @@
 add_subdirectory(KeyGenerator)
-add_subdirectory(KeyValidater)
+add_subdirectory(KeyValidator)

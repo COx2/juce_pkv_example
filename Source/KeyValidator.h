@@ -6,12 +6,12 @@ namespace cox2
 {
 
 //==============================================================================
-class KeyValidater
+class KeyValidator
 {
 public:
     //==============================================================================
-    KeyValidater();
-    ~KeyValidater();
+    KeyValidator();
+    ~KeyValidator();
 
     //==============================================================================
     bool isKeyValid(const juce::String& key);
@@ -33,7 +33,7 @@ private:
 
     bool isSerialChecksumValid(const juce::String& serial, const juce::String& checksum);
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KeyValidater)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KeyValidator)
 };
 
 }

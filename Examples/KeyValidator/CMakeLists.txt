@@ -1,7 +1,7 @@
-juce_add_console_app(KeyValidater
-    PRODUCT_NAME "KeyValidater") 
+juce_add_console_app(KeyValidator
+    PRODUCT_NAME "KeyValidator") 
     
-juce_generate_juce_header(KeyValidater)
+juce_generate_juce_header(KeyValidator)
 
 ### Find source files with generate source groups ###
 # Test that the target_path should be excluded
@@ -84,14 +84,14 @@ generate_source_list(
 #     EXCLUSION_PATTERNS ".+/Test/.+"
     )
 
-target_sources(KeyValidater
+target_sources(KeyValidator
     PRIVATE
         ${SOURCES}
     )
 
 ###^^^ Find source files with generate source groups ^^^###
 
-target_compile_definitions(KeyValidater
+target_compile_definitions(KeyValidator
     PUBLIC
         # JUCE_WEB_BROWSER and JUCE_USE_CURL would be on by default, but you might not need them.
         JUCE_WEB_BROWSER=0  # If you remove this, add `NEEDS_WEB_BROWSER TRUE` to the `juce_add_plugin` call
@@ -99,7 +99,7 @@ target_compile_definitions(KeyValidater
         JUCE_VST3_CAN_REPLACE_VST2=0
         JUCE_DISPLAY_SPLASH_SCREEN=0)
 
-target_link_libraries(KeyValidater
+target_link_libraries(KeyValidator
     PRIVATE
         pkv
         juce::juce_audio_utils
